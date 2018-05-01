@@ -1,0 +1,61 @@
+// Definition for arrays:
+// typedef struct arr_##name {
+//   int size;
+//   type *arr;
+// } arr_##name;
+//
+// arr_##name alloc_arr_##name(int len) {
+//   arr_##name a = {len, len > 0 ? malloc(sizeof(type) * len) : NULL};
+//   return a;
+// }
+//
+//
+int firstDuplicate(arr_integer a) {
+    int seen[a.size];
+    for (int i=0; i<a.size; i++){
+        seen[i]=0;
+    }
+    for (int i=0; i<a.size; i++){
+        if (seen[a.arr[i]] == a.arr[i]) {
+            return a.arr[i];
+        }
+        else seen[a.arr[i]] = a.arr[i];
+            //printf("%d",a.arr[i]);
+    }
+    return -1;
+}
+
+/* Solution that does not meet execution time limit:
+    int index = a.size;
+    int first = 1;
+
+    for(int current=0; current<index; current++){
+        for(int next=current+1; next<a.size; next++){
+            if(a.arr[current] == a.arr[next]){
+                if (first) {
+                    index = next;
+                    first = 0;
+                }
+                if (index > next) index=next; 
+                break;
+            }
+        }
+    }
+    if (first){
+        return -1;
+    }
+    else return a.arr[index];
+*/
+
+/* Another solution that does not meet time constraint:
+     arr_integer acopy = a;
+    int k=1;
+    for(int i=k; i<a.size; i++){
+        if(a.arr[i]-acopy.arr[i-k]==0) return a.arr[i];
+        if(i==a.size-1){
+            k++;
+            i=k;
+        }
+    }
+    return -1;
+*/

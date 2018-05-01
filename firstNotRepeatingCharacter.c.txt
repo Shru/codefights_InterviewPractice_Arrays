@@ -1,0 +1,27 @@
+char firstNotRepeatingCharacter(char * s) {
+    int k = 0;
+    int i = k+1;
+    int repeatFound = false;
+    
+    char *c = s;
+    
+    while (*(s+k) != NULL){
+        while (i != k){ //*(s+i) != NULL
+            if (*(s+k) == *(s+i)){
+                repeatFound = true;
+                break;
+            }
+            else {
+                repeatFound = false;
+                i++;
+                if (*(s+i) == NULL) i=0;
+            }
+        }
+        if (repeatFound == false){
+            return *(s+k);
+        }
+        k++;
+        i=k+1;
+    }
+    return '_';
+}

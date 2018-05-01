@@ -1,0 +1,49 @@
+// Definition for arrays:
+// typedef struct arr_##name {
+//   int size;
+//   type *arr;
+// } arr_##name;
+//
+// arr_##name alloc_arr_##name(int len) {
+//   arr_##name a = {len, len > 0 ? malloc(sizeof(type) * len) : NULL};
+//   return a;
+// }
+//
+//
+//
+#include <stdlib.h>
+
+
+bool isCryptSolution(arr_string crypt, arr_arr_char solution) {
+    
+    for(int k=0; k<solution.size; k++){
+        if (((int)(solution.arr[k].arr[1])<0)&&((int)(solution.arr[k].arr[1])>9)) return false;
+    }
+    
+    for(int wcount=0; wcount<crypt.size; wcount++){
+        int i=0;
+        while (crypt.arr[wcount][i]!='\0'){
+            int j=0;
+            while(solution.arr[j].arr[0]!='\0'){
+                if(crypt.arr[wcount][i]==solution.arr[j].arr[0]){
+                        crypt.arr[wcount][i]=solution.arr[j].arr[1];
+                        break;
+                }
+                else j++;
+            }
+            i++;
+        }
+    }
+
+    if((crypt.arr[0][0]=='0')&&(crypt.arr[0][1]!='\0')||((crypt.arr[1][0]=='0')&&(crypt.arr[1][1]!='\0'))||((crypt.arr[2][0]=='0')&&(crypt.arr[2][1]!='\0'))) return false;
+    else {
+        int64_t word1 = atoll(crypt.arr[0]);
+        int64_t word2 = atoll(crypt.arr[1]);
+        int64_t word3 = atoll(crypt.arr[2]);
+        printf("%ld\n",word3);
+        printf("%ld",word1+word2);
+        if(word3 == (word1+word2)) return true;
+    }
+    return false;
+    
+}

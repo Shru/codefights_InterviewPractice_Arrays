@@ -1,0 +1,28 @@
+// Definition for arrays:
+// typedef struct arr_##name {
+//   int size;
+//   type *arr;
+// } arr_##name;
+//
+// arr_##name alloc_arr_##name(int len) {
+//   arr_##name a = {len, len > 0 ? malloc(sizeof(type) * len) : NULL};
+//   return a;
+// }
+//
+//
+arr_arr_integer rotateImage(arr_arr_integer a) {
+    for (int i=0; i<a.size/2; i++){
+        for (int j=i; j<a.size-i-1; j++){
+            int element1 = a.arr[i].arr[j];
+            int element2 = a.arr[j].arr[a.size-i-1];
+            int element3 = a.arr[a.size-i-1].arr[a.size-j-1];
+            int element4 = a.arr[a.size-j-1].arr[i];
+            
+            a.arr[j].arr[a.size-i-1] = element1;
+            a.arr[a.size-i-1].arr[a.size-j-1] = element2;
+            a.arr[a.size-j-1].arr[i] = element3;
+            a.arr[i].arr[j] = element4;
+        }
+    }
+    return a;
+}
